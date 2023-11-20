@@ -15,6 +15,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(cookieParser());
 
 //Rutas
 app.get('/', (req, res) => {
