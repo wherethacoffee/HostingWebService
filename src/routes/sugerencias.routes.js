@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { getSugerencias, getSugerencia, add, update, remove } from "../controllers/sugerencia.controller.js";
+import { validateSchema } from "../middlewares/validator.middleware.js";
+import { addSugerencia } from "../schemas/sugerencia.schema.js";
 
 const router = Router();
 
@@ -8,7 +10,7 @@ router.get('/listar', getSugerencias);
 router.get('/buscar/:id', getSugerencia);
 
 //Agregar
-router.post('/agregar', add);
+router.post('/agregar', validateSchema(addSugerencia), add);
 
 //Actualizar
 router.put('/actualizar/:id', update);
