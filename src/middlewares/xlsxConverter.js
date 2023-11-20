@@ -5,7 +5,7 @@ export const createXLSX = (res, filename, data) => {
         const wb = new ExcelJS.Workbook();
         const ws = wb.addWorksheet('Registros');
 
-        const headers = Object.keys(data[0]);
+        const headers = data.length > 0 ? Object.keys(data[0].toObject()) : [];
 
         ws.addRow(headers);
 
