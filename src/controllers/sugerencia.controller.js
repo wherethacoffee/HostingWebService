@@ -1,4 +1,5 @@
 import Sugerencia from "../models/sugerencia.model.js";
+import { createXLSX } from "../middlewares/xlsxConverter.js";
 
 export const add = async (req, res) => {
     const { nombre, correo, mensaje } = req.body;
@@ -18,8 +19,14 @@ export const add = async (req, res) => {
 };
 
 export const getSugerencias = async (req, res) => {
-    const sugerencias = await Sugerencia.find();
-    res.json(sugerencias);
+    try {
+        const sugerencias = await Sugerencia.find();
+
+        createXLSX(res, 'sugerencias.xlsx', sugerencias);
+    } catch (error) {
+        console.error('Error al obtener sugerencias:', error);
+        res.status(500).json({ error: 'Error al obtener sugerencias' });
+    }
 };
 
 export const getSugerencia = async (req, res) => {
