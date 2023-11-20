@@ -9,14 +9,16 @@ import {
     remove, 
     update } from "../controllers/admin.controller.js";
 import { authRequired } from "../middlewares/validateToken.js"
+import { validateSchema } from "../middlewares/validator.middleware.js";
+import { registerSchema, loginSchema } from "../schemas/admin.schema.js";
 
 const router = Router();
 
 //Registrar
-router.post('/register', register);
+router.post('/register', validateSchema(registerSchema), register);
 
 //Login
-router.post('/login', login);
+router.post('/login', validateSchema(loginSchema), login);
 
 //Consultas
 router.get('/listar', authRequired, getAdmins);
