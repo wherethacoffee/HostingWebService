@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import adminRoutes from './routes/admins.routes.js'
 import sugerenciasRoutes from "./routes/sugerencias.routes.js";
 import planesRoutes from "./routes/planes.routes.js";
+import contratoRoutes from "./routes/contratos.routes.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/admin', adminRoutes);
 app.use('/sugerencias', sugerenciasRoutes);
 app.use('/planes', planesRoutes);
+app.use('/contratos', contratoRoutes);
 
 
 export default app;
