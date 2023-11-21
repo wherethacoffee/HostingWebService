@@ -24,7 +24,11 @@ export const add = async (req, res) => {
         });
         const contratoSaved = await newContrato.save();
 
-        res.json({ message: `Item ${contratoSaved._id} registered successfully`})
+        const contratoFound = await Contrato.findById(contratoSaved._id).populate('plan');
+        if (!contratoFound) return res.status(404).json({ message: 'Contrato not found' });
+    
+        generatePDFTicket(req, res, contratoFound)
+        //res.json({ message: `Item ${contratoSaved._id} registered successfully`})
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
