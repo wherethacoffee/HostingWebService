@@ -23,7 +23,7 @@ export const getPlanes = async (req, res) => {
     res.json(planes);
 };
 
-export const getPlan = async (req, res) => {
+export const exportarDetallesPDF = async (req, res) => {
     try {
         const plan = await Plan.findById(req.params.id);
         if (!plan) return res.status(404).json({ message: 'Plan not found' });
@@ -34,6 +34,13 @@ export const getPlan = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener el plan' });
     }
 };
+
+export const getPlan = async (req, res) => {
+    const plan = await Plan.findById(req.params.id);
+    if (!plan) return res.status(404).json({ message: 'Plan not found' });
+
+    res.json(plan);
+}
 
 export const update = async (req, res) => {
     const plan = await Plan.findByIdAndUpdate(req.params.id, req.body);

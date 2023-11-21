@@ -18,11 +18,21 @@ export const add = async (req, res) => {
     }
 };
 
-export const getSugerencias = async (req, res) => {
+export const exportarSugerenciasXLSX = async (req, res) => {
     try {
         const sugerencias = await Sugerencia.find();
 
         createXLSX(res, 'sugerencias.xlsx', sugerencias);
+    } catch (error) {
+        console.error('Error al obtener sugerencias:', error);
+        res.status(500).json({ error: 'Error al obtener sugerencias' });
+    }
+};
+
+export const getSugerencias = async (req, res) => {
+    try {
+        const sugerencias = await Sugerencia.find();
+    res.send(sugerencias);
     } catch (error) {
         console.error('Error al obtener sugerencias:', error);
         res.status(500).json({ error: 'Error al obtener sugerencias' });
