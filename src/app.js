@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 //Import de las rutas
 import adminRoutes from './routes/admins.routes.js'
 import sugerenciasRoutes from "./routes/sugerencias.routes.js";
+import planesRoutes from "./routes/planes.routes.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 });
 app.use('/admin', adminRoutes);
 app.use('/sugerencias', sugerenciasRoutes);
+app.use('/planes', planesRoutes);
 
 
 export default app;
